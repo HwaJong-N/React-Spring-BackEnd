@@ -13,6 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addFormatter(new LocalDateFormatter());
     }
 
+    /* SecurityConfig 로 이동
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")  // CORS 를 적용할 URL 정의
@@ -21,4 +22,5 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"); // 어떤 Http Method 를 허용할 것인지
 
     }
+    */
 }
