@@ -26,11 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         log.info("################## loadUserByUsername ##################");
         log.info("username = {}", username);
 
-        Member member = memberRepository.findMemberWithRoles(username);
-
-        if (member == null) {
-            throw new UsernameNotFoundException("존재하지 않는 사용자입니다");
-        }
+        Member member = memberRepository.findMemberWithRoles(username).orElseThrow(() -> new UsernameNotFoundException("존재하지 않는 사용자입니다"));
 
         log.info("member = {}", member);
         log.info("member's role = {}", member.getMemberRoleList());
@@ -39,7 +35,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                member.getEmail(),
                member.getPassword(),
                member.getNickname(),
-               member.isSocialFlag(),
+               member.isNeedModifyFlag(),
                member.getMemberRoleList().stream()
                        .map(Enum::name).collect(Collectors.toList()));
     }

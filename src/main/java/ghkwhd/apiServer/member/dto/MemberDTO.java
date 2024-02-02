@@ -11,18 +11,18 @@ import java.util.stream.Collectors;
 
 public class MemberDTO extends User {
     private String email, password, nickname;
-    private boolean socialFlag;
+    private boolean needModifyFlag;
     private List<String> roleNames = new ArrayList<>();
 
 
-    public MemberDTO(String email, String password, String nickname, boolean socialFlag, List<String> roleNames) {
+    public MemberDTO(String email, String password, String nickname, boolean needModifyFlag, List<String> roleNames) {
         super(email, password,
                 roleNames.stream().map(str ->
                         new SimpleGrantedAuthority("ROLE_"+str)).collect(Collectors.toList()));
         this.email = email;
         this.password = password;
         this.nickname = nickname;
-        this.socialFlag = socialFlag;
+        this.needModifyFlag = needModifyFlag;
         this.roleNames = roleNames;
     }
 
@@ -31,7 +31,7 @@ public class MemberDTO extends User {
         dataMap.put("email", email);
         dataMap.put("password", password);
         dataMap.put("nickname", nickname);
-        dataMap.put("socialFlag", socialFlag);
+        dataMap.put("needModifyFlag", needModifyFlag);
         dataMap.put("roleNames", roleNames);
         return dataMap;
     }

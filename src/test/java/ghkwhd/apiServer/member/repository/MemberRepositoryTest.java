@@ -26,7 +26,7 @@ class MemberRepositoryTest {
                     .email("member" + String.valueOf(i) + "@email.com")
                     .password(passwordEncoder.encode(String.valueOf(i) + String.valueOf(i) + String.valueOf(i) + String.valueOf(i)))
                     .nickname("member" + String.valueOf(i))
-                    .socialFlag(false)
+                    .needModifyFlag(false)
                     .build();
             member.addRole(MemberRole.USER);
 
@@ -46,7 +46,7 @@ class MemberRepositoryTest {
     @Test
     void readTest() {
         String email = "member9@email.com";
-        Member memberWithRoles = memberRepository.findMemberWithRoles(email);
+        Member memberWithRoles = memberRepository.findMemberWithRoles(email).orElseThrow();
 
         log.info("userWithRoles = {}", memberWithRoles);
         log.info("userWithRoles Roles = {}", memberWithRoles.getMemberRoleList());

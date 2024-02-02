@@ -17,7 +17,7 @@ public class Member {
     private String email;
     private String password;
     private String nickname;
-    private boolean socialFlag; // 소셜 로그인으로 회원가입 된 사람인지 판별하는 플래그
+    private boolean needModifyFlag; // 소셜 로그인 시, 비밀번호 변경이 필요하기 때문에 socialFlag 에서 변경됨
 
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default
@@ -39,7 +39,7 @@ public class Member {
         this.nickname = nickname;
     }
 
-    public void setSocialFlag(boolean socialFlag) {
-        this.socialFlag = socialFlag;
+    public void setNeedModifyFlag(boolean needModifyFlag) {
+        this.needModifyFlag = needModifyFlag;
     }
 }

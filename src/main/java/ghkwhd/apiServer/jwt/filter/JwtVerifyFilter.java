@@ -24,7 +24,8 @@ import java.util.Map;
 @Slf4j
 public class JwtVerifyFilter extends OncePerRequestFilter {
 
-    private static final String[] whitelist = {"/api/member/**", "/api/refresh"};
+    // 상품 이미지가 보이지 않기에 상품 이미지를 출력하는 /api/items/view 경로를 추가
+    private static final String[] whitelist = {"/api/member/**", "/api/refresh", "/api/items/view/**"};
 
     private static void checkAuthorizationHeader(String header) {
         if(header == null) {
@@ -60,11 +61,11 @@ public class JwtVerifyFilter extends OncePerRequestFilter {
             String email = (String) claims.get("email");
             String password = (String) claims.get("password");
             String nickname = (String) claims.get("nickname");
-            Boolean socialFlag = (Boolean) claims.get("socialFlag");
+            Boolean needModifyFlag = (Boolean) claims.get("needModifyFlag");
             List<String> roleNames = (List<String>) claims.get("roleNames");
 
             // 사용자의 정보를 통해 새 DTO 객체를 생성
-            MemberDTO memberDTO = new MemberDTO(email, password, nickname, socialFlag, roleNames);
+            MemberDTO memberDTO = new MemberDTO(email, password, nickname, needModifyFlag, roleNames);
             log.info("memberDTO = {}", memberDTO);
             log.info("memberDTO.getAuthorities() = {}", memberDTO.getAuthorities());
 
